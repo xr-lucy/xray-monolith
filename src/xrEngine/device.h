@@ -75,8 +75,10 @@ public:
 	Fmatrix mView;
 	Fmatrix mProject;
 	Fmatrix mProjectHud;
+	Fmatrix mProjectCamAttached;
 	Fmatrix mFullTransform;
 	Fmatrix mFullTransformHud;
+	Fmatrix mFullTransformCamAttached;
 
 	Fmatrix mView_prev;
 	Fmatrix mProject_prev;
@@ -368,6 +370,11 @@ public:
 	Fmatrix& hud_to_world(Fmatrix& m)
 	{
 		return hud_to_world(m, mProjectHud);
+	}
+
+	Fmatrix& cam_to_world(Fmatrix& m)
+	{
+		return hud_to_world(m, mProjectCamAttached);
 	}
 
 	Fvector& world_to_hud(Fvector& v, const Fmatrix& p)

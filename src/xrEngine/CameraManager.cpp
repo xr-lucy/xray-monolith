@@ -475,6 +475,7 @@ void CCameraManager::ApplyDevice(float _viewport_near)
 
 	Device.mProject.build_projection(deg2rad(Device.fFOV), m_cam_info.fAspect, _viewport_near, m_cam_info.fFar);
 	Device.mProjectHud.build_projection(deg2rad(psHUD_FOV * 83.f), Device.fASPECT, R_VIEWPORT_NEAR, m_cam_info.fFar);
+	Device.mProjectCamAttached.build_projection(deg2rad(83.f), Device.fASPECT, R_VIEWPORT_NEAR, m_cam_info.fFar);
 
 	Device.mInvProject.invert(Device.mProject);
 	Device.mInvProjectHud.invert(Device.mProjectHud);

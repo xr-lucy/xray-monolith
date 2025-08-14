@@ -372,6 +372,7 @@ void CRenderDevice::on_idle()
 	START_PROFILE("Matrices");
 	mFullTransform.mul(mProject, mView);
 	mFullTransformHud.mul(mProjectHud, mView);
+	mFullTransformCamAttached.mul(mProjectCamAttached, mView);
 	m_pRender->SetCacheXform(mView, mProject);
 
 	// Previous frame data -- 

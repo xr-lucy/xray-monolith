@@ -619,14 +619,8 @@ void R_dsgraph_structure::r_dsgraph_render_hud(bool NoPS)
 			rmNear();
 
 			// Change projection
-			Fmatrix camproj;
-			camproj.build_projection(
-				deg2rad(83.f),
-				Device.fASPECT, R_VIEWPORT_NEAR,
-				g_pGamePersistent->Environment().CurrentEnv->far_plane);
-
-			Device.mFullTransform.mul(camproj, Device.mView);
-			RCache.set_xform_project(camproj);
+			Device.mFullTransform = Device.mFullTransformCamAttached;
+			RCache.set_xform_project(Device.mProjectCamAttached);
 
 			// Rendering
 			mapCamAttached.traverseLR(sorted_L1);
@@ -635,33 +629,6 @@ void R_dsgraph_structure::r_dsgraph_render_hud(bool NoPS)
 			rmNormal();
 		}
 	}
-	/*else
-	{
-		HUDMask.traverseLR(hud_node);
-		HUDMask.clear();
-
-		if (HUDMaskCamAttached.size())
-		{
-			rmNear();
-
-			// Change projection
-			Fmatrix camproj;
-			camproj.build_projection(
-				deg2rad(83.f),
-				Device.fASPECT, R_VIEWPORT_NEAR,
-				g_pGamePersistent->Environment().CurrentEnv->far_plane);
-
-			Device.mFullTransform.mul(camproj, Device.mView);
-			RCache.set_xform_project(camproj);
-
-			// Rendering
-			HUDMaskCamAttached.traverseLR(hud_node);
-			HUDMaskCamAttached.clear();
-		}
-
-		rmNormal();
-	}*/
-
 
 	// Restore projection
 	Device.mFullTransform = FTold;
@@ -692,15 +659,8 @@ void R_dsgraph_structure::r_dsgraph_render_cam_ui()
 {
 	// Change projection
 	Fmatrix FTold = Device.mFullTransform;
-
-	Fmatrix camproj;
-	camproj.build_projection(
-		deg2rad(83.f),
-		Device.fASPECT, R_VIEWPORT_NEAR,
-		g_pGamePersistent->Environment().CurrentEnv->far_plane);
-
-	Device.mFullTransform.mul(camproj, Device.mView);
-	RCache.set_xform_project(camproj);
+	Device.mFullTransform = Device.mFullTransformCamAttached;
+	RCache.set_xform_project(Device.mProjectCamAttached);
 
 	// Rendering
 	rmNear();
@@ -735,14 +695,8 @@ void R_dsgraph_structure::r_dsgraph_render_sorted()
 	if (mapCamAttachedSorted.size())
 	{
 		// Change projection
-		Fmatrix camproj;
-		camproj.build_projection(
-			deg2rad(83.f),
-			Device.fASPECT, R_VIEWPORT_NEAR,
-			g_pGamePersistent->Environment().CurrentEnv->far_plane);
-
-		Device.mFullTransform.mul(camproj, Device.mView);
-		RCache.set_xform_project(camproj);
+		Device.mFullTransform = Device.mFullTransformCamAttached;
+		RCache.set_xform_project(Device.mProjectCamAttached);
 
 		// Rendering
 		mapCamAttachedSorted.traverseRL(sorted_L1);

@@ -294,6 +294,7 @@
         function project(Fvector v)
 
         function hud_to_world()
+        function cam_to_world()
         function world_to_hud()
 
         function hud_to_world_dir()
